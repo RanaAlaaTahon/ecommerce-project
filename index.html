@@ -19,15 +19,25 @@
 <body>
     <header>
         <div class="nav container">
-            <a href="" class="logo">MyShop</a>
-            <a href="cart.html" class='bx bx-cart' id="cart-icon"></a>
+            <a href="index.html" class="logo">MyShop</a>
+            <input type="text" placeholder="Search..." class="searchInput">
+            <a href="searchIcon"><i class='bx bx-search' id="search-icon"></i></a>
+            <div class="cart-icon">
+                <a href="cart.html" class='bx bx-cart' id="cart-icon"></a>
+                <span id="cart-number">0</span>
+            </div>
+            <div class="search">
+            </div>
         </div>
     </header>
+
     <section class="shop container">
         <h2 class="section-title">Shop Products</h2>
         <div class="shop-content" id="shop-content">
         </div>
     </section>
+
+
 
     <script src="main.js"></script>
 

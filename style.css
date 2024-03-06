@@ -56,13 +56,40 @@ header {
     font-weight: 800;
 }
 
+.search {
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-color);
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+.searchInput {
+    border: none;
+    background-color: transparent;
+}
+
+.searchInput::placeholder {
+    color: var(--text-color);
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+#search-icon {
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--text-color);
+}
+
 #cart-icon {
     font-size: 2rem;
     cursor: pointer;
     color: var(--text-color);
 }
 
+
 .section-title {
+    color: var(--text-color);
     font-size: 1.5rem;
     font-weight: 600;
     text-align: center;
@@ -122,4 +149,48 @@ header {
 
 .add-cart:hover {
     background: var(--main-color);
+}
+
+.table-title {
+    color: var(--text-color);
+    margin-top: 2rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+
+.cart-items {
+    border-collapse: collapse;
+    margin: auto;
+    font-size: 0.9em;
+    min-width: 400px;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.cart-items thead tr {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    text-align: left;
+    font-weight: bold;
+}
+
+.cart-items th,
+.cart-items td {
+    padding: 12px 15px;
+}
+
+.cart-items tbody tr {
+    border-bottom: 1px solid var(--main-color);
+}
+
+.cart-items tbody tr:nth-of-type(even) {
+    background-color: var(--bg-color);
+}
+
+.cart-items tbody tr:last-of-type {
+    border-bottom: 2px solid var(--main-color);
 }
