@@ -3,45 +3,50 @@ fetch("https://fakestoreapi.com/products").then((data) =>
         console.log(products);
         products.map(addProduct);
     })
+let totalItems = 0;
+let cartArr = [];
+if (localStorage.getItem("cartArr") != null) {
+    cartArr = JSON.parse(localStorage.getItem("cartArr"))
+    totalItems = Number(localStorage.getItem("totalItem"))
+    updateCart();
+}
 
-    let cartArr = [];
-    let totalItems=0;
 
-    function addItem(item) {
-        let productIndex = cartArr.findIndex(function (product) {
-            return product.title == item.title
-        })
-        if (productIndex == -1) {
-            item.quantity =1;
+function addItem(item) {
+    let productIndex = cartArr.findIndex(function (product) {
+        return product.title == item.title
+    })
+    if (productIndex == -1) {
+        item.quantity = 1;
 
-            cartArr.push({...item})
+        cartArr.push({ ...item })
 
-        }
-        else {
-            cartArr[productIndex].quantity += item.quantity
-        }
-        totalItems += item.quantity
-        updateCart();
-        console.log(cartArr);
     }
-    
-    function removeItem(title) {
-        let productIndex = cartArr.findIndex(function (product) {
-            return product.title == title
-        })
-        if (productIndex == -1) {
-            return;
-        }
-        if (cartArr[productIndex].quantity == 1) {
-            cartArr.splice(productIndex, 1)
-        }
-        else {
-            cartArr[productIndex].quantity -= 1
-        }
-        totalItems -= 1
-        updateCart();
+    else {
+        cartArr[productIndex].quantity += item.quantity
     }
-    
+    totalItems += item.quantity
+    updateCart();
+    console.log(cartArr);
+}
+
+function removeItem(title) {
+    let productIndex = cartArr.findIndex(function (product) {
+        return product.title == title
+    })
+    if (productIndex == -1) {
+        return;
+    }
+    if (cartArr[productIndex].quantity == 1) {
+        cartArr.splice(productIndex, 1)
+    }
+    else {
+        cartArr[productIndex].quantity -= 1
+    }
+    totalItems -= 1
+    updateCart();
+}
+
 
 function addProduct(product) {
     const shopContent = document.getElementById("shop-content")
@@ -55,17 +60,17 @@ function addProduct(product) {
     <button class='bx bx-cart add-cart' id="cart-btn${product.id}"></button>
     `
     shopContent.appendChild(productBox)
-    const addToCartBtn= document.getElementById(`cart-btn${product.id}`)
-    addToCartBtn.addEventListener("click",(e)=>{
+    const addToCartBtn = document.getElementById(`cart-btn${product.id}`)
+    addToCartBtn.addEventListener("click", (e) => {
         addItem(product);
     })
-
 }
 
-function updateCart(){
+function updateCart() {
     const cartTotalItems = document.getElementById("cart-number")
     cartTotalItems.innerText = totalItems
-    localStorage.setItem("cartArr",JSON.stringify(cartArr))
+    localStorage.setItem("cartArr", JSON.stringify(cartArr))
+    localStorage.setItem("totalItem", totalItems)
 }
 
 
