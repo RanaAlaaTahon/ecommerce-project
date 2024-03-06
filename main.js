@@ -4,8 +4,44 @@ fetch("https://fakestoreapi.com/products").then((data) =>
         products.map(addProduct);
     })
 
+    let cartArr = [];
+    let totalItems=0;
 
+    function addItem(item) {
+        let productIndex = cartArr.findIndex(function (product) {
+            return product.title == item.title
+        })
+        if (productIndex == -1) {
+            item.quantity =1;
 
+            cartArr.push({...item})
+
+        }
+        else {
+            cartArr[productIndex].quantity += item.quantity
+        }
+        totalItems += item.quantity
+        updateCart();
+        console.log(cartArr);
+    }
+    
+    function removeItem(title) {
+        let productIndex = cartArr.findIndex(function (product) {
+            return product.title == title
+        })
+        if (productIndex == -1) {
+            return;
+        }
+        if (cartArr[productIndex].quantity == 1) {
+            cartArr.splice(productIndex, 1)
+        }
+        else {
+            cartArr[productIndex].quantity -= 1
+        }
+        totalItems -= 1
+        updateCart();
+    }
+    
 
 function addProduct(product) {
     const shopContent = document.getElementById("shop-content")
@@ -16,42 +52,27 @@ function addProduct(product) {
     <h2 class="product-title">${product.title}</h2>
     <p class="product-description">${product.description.substring(0, 64)}</p>
     <span class="price">${product.price}$</span>
-    <i class='bx bx-cart add-cart'></i>
+    <button class='bx bx-cart add-cart' id="cart-btn${product.id}"></button>
     `
     shopContent.appendChild(productBox)
-}
-
-
-
-
-let cartArr = [];
-
-function addItem(item) {
-    let productIndex = cartArr.findIndex(function (product) {
-        return product.name == item.name
+    const addToCartBtn= document.getElementById(`cart-btn${product.id}`)
+    addToCartBtn.addEventListener("click",(e)=>{
+        addItem(product);
     })
-    if (productIndex == -1) {
-        cartArr.push(item)
-    }
-    else {
-        cartArr[productIndex].quantity += item.quantity
-    }
+
 }
 
-function removeItem(name) {
-    let productIndex = cartArr.findIndex(function (product) {
-        return product.name == name
-    })
-    if (productIndex == -1) {
-        return;
-    }
-    if (cartArr[productIndex].quantity == 1) {
-        cartArr.splice(productIndex, 1)
-    }
-    else {
-        cartArr[productIndex].quantity -= 1
-    }
+function updateCart(){
+    const cartTotalItems = document.getElementById("cart-number")
+    cartTotalItems.innerText = totalItems
+    localStorage.setItem("cartArr",JSON.stringify(cartArr))
 }
+
+
+
+
+
+
 
 
 function printReceipt() {

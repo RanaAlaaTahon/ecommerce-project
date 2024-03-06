@@ -87,6 +87,30 @@ header {
     color: var(--text-color);
 }
 
+.filter-container{
+    margin-top: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    background-color: var(--text-color);
+}
+
+#category{
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    font-size: 0.8rem;
+    font-weight: 400;
+}
+
+#sorting{
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    font-size: 0.8rem;
+    font-weight: 400;
+}
+
+
 
 .section-title {
     color: var(--text-color);
