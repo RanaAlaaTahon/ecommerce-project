@@ -87,23 +87,31 @@ header {
     color: var(--text-color);
 }
 
-.filter-container{
+.filter-container {
+    width: 100%;
     margin-top: 80px;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    padding: 10px 0;
+    align-items: center;
+    padding: 10px px;
     background-color: var(--text-color);
 }
 
-#category{
+#selectCategory {
     color: var(--text-color);
     background-color: var(--bg-color);
     font-size: 0.8rem;
     font-weight: 400;
 }
 
-#sorting{
+#sorting {
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    font-size: 0.8rem;
+    font-weight: 400;
+}
+
+#resetFilter {
     color: var(--text-color);
     background-color: var(--bg-color);
     font-size: 0.8rem;

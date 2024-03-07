@@ -1,8 +1,5 @@
-fetch("https://fakestoreapi.com/products").then((data) =>
-    data.json()).then((products) => {
-        console.log(products);
-        products.map(addProduct);
-    })
+let allProducts = []
+let lastFilteredProducts = []
 let totalItems = 0;
 let cartArr = [];
 if (localStorage.getItem("cartArr") != null) {
@@ -11,6 +8,13 @@ if (localStorage.getItem("cartArr") != null) {
     updateCart();
 }
 
+fetch("https://fakestoreapi.com/products").then((data) =>
+    data.json()).then((products) => {
+        console.log(products);
+        products.map(addProduct);
+        allProducts = [...products]
+        lastFilteredProducts = [...products]
+    })
 
 function addItem(item) {
     let productIndex = cartArr.findIndex(function (product) {
@@ -73,7 +77,73 @@ function updateCart() {
     localStorage.setItem("totalItem", totalItems)
 }
 
+const textSearchInput = document.getElementById("searchInput");
+textSearchInput.addEventListener('input', (e) => {
+    console.log(e.target.value);
+    let filteredProducts = lastFilteredProducts.filter((product) => {
+        return product.title.toLowerCase().includes(e.target.value.toLowerCase())
+    })
+    console.log(filteredProducts);
+    const shopContent = document.getElementById("shop-content")
+    shopContent.innerHTML = ""
+    filteredProducts.map(addProduct);
+})
 
+const categorySelection = document.getElementById("selectCategory");
+categorySelection.addEventListener('change', (e) => {
+    console.log(e.target.value)
+    const categories = ["", "Women's Clothing", "Men's Clothing", "Jewelery", "Electronics"]
+    console.log(categories[e.target.value])
+    const category = categories[e.target.value]
+    let categoryProducts = []
+    if (category == "") {
+        categoryProducts = allProducts
+    }
+    else {
+        categoryProducts = lastFilteredProducts.filter((product) => {
+            return product.category.toLowerCase() == category.toLowerCase()
+        })
+    }
+
+    lastFilteredProducts = categoryProducts
+    console.log(categoryProducts);
+    const shopContent = document.getElementById("shop-content")
+    shopContent.innerHTML = ""
+    categoryProducts.map(addProduct)
+})
+
+const sortByPrice = document.getElementById("sorting");
+sortByPrice.addEventListener('change', (e) => {
+    console.log(e.target.value)
+    let sortedProducts = []
+    if (e.target.value == "highToLow") {
+        sortedProducts = lastFilteredProducts.sort((a, b) => {
+            return parseFloat(b.price) - parseFloat(a.price)
+        })
+    }
+    else if (e.target.value == "lowToHigh") {
+        sortedProducts = lastFilteredProducts.sort((a, b) => {
+            return parseFloat(a.price) - parseFloat(b.price)
+        })
+    }
+    else {
+        sortedProducts = allProducts
+    }
+    lastFilteredProducts = sortedProducts
+    console.log(sortedProducts);
+    const shopContent = document.getElementById("shop-content")
+    shopContent.innerHTML = ""
+    sortedProducts.map(addProduct)
+
+})
+
+const resetFiltered = document.getElementById("resetFilter");
+resetFiltered.addEventListener("click", (e) => {
+    lastFilteredProducts = [...allProducts]
+    const shopContent = document.getElementById("shop-content")
+    shopContent.innerHTML = ""
+    lastFilteredProducts.map(addProduct)
+})
 
 
 

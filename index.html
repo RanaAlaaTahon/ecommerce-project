@@ -20,7 +20,7 @@
     <header>
         <div class="nav container">
             <a href="index.html" class="logo">MyShop</a>
-            <input type="text" placeholder="Search..." class="searchInput">
+            <input type="text" placeholder="Search..." class="searchInput" id="searchInput">
             <a href="searchIcon"><i class='bx bx-search' id="search-icon"></i></a>
             <div class="cart-icon">
                 <a href="cart.html" class='bx bx-cart' id="cart-icon"></a>
@@ -33,24 +33,25 @@
 
     <section class="filter-container">
         <div class="category">
-            <select name="category" id="sorting">
-                <option value="defult">Select Category</option>
-                <option value="clothes">clothes</option>
-                <option value="clothes">clothes</option>
-                <option value="clothes">clothes</option>
-                <option value="clothes">clothes</option>
+            <select name="category" id="selectCategory">
+                <option value="0">All Categories</option>
+                <option value="1">Women's Clothing</option>
+                <option value="2">Men's Clothing</option>
+                <option value="3">Jewelery</option>
+                <option value="4">Electronics</option>
             </select>
-
         </div>
         <div class="sort">
             <select name="sorting" id="sorting">
-                <option value="defult">Sort</option>
+                <option value="default">Sort</option>
                 <option value="highToLow">Price: High to Low</option>
                 <option value="lowToHigh">Price: Low to High</option>
             </select>
         </div>
+        <div class="reset">
+            <button id="resetFilter">Reset</button>
+        </div>
     </section>
-
     <section class="shop container">
         <h2 class="section-title">Shop Products</h2>
         <div class="shop-content" id="shop-content">
