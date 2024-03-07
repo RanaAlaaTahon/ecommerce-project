@@ -21,15 +21,15 @@ function addItem(item) {
         return product.title == item.title
     })
     if (productIndex == -1) {
-        item.quantity = 1;
 
-        cartArr.push({ ...item })
+
+        cartArr.push({ ...item, "quantity": 1 })
 
     }
     else {
-        cartArr[productIndex].quantity += item.quantity
+        cartArr[productIndex].quantity += 1
     }
-    totalItems += item.quantity
+    totalItems += 1
     updateCart();
     console.log(cartArr);
 }
